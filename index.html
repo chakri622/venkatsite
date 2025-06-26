@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header Menu</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f0;
+        min-height: 100vh;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #e8f0e8 0%, #f0f8f0 100%);
+        padding: 12px 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          #4a5eb8 0%,
+          #2a4a8a 50%,
+          #1a3a7a 100%
+        );
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        display: inline-block;
+        padding: 12px 24px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo {
+        width: 70px;
+        height: 70px;
+        background-image: url("files/logo.jpg");
+        background-size: cover;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #667eea;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+        object-fit: contain; /* Maintains aspect ratio */
+      }
+
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+      .logo-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .logo {
+          height: 40px;
+          max-width: 150px;
+        }
+      }
+
+      .nav-link.primary {
+        background: linear-gradient(135deg, #5a7a6a 0%, #4a6a5a 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(90, 122, 106, 0.3);
+      }
+
+      .nav-link.primary:hover {
+        background: linear-gradient(135deg, #6a8a7a 0%, #5a7a6a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(90, 122, 106, 0.4);
+      }
+
+      .nav-link.secondary {
+        background: linear-gradient(135deg, #7a9a8a 0%, #6a8a7a 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(122, 154, 138, 0.3);
+      }
+
+      .nav-link.secondary:hover {
+        background: linear-gradient(135deg, #8aaa9a 0%, #7a9a8a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(122, 154, 138, 0.4);
+      }
+
+      .nav-link.tertiary {
+        background: linear-gradient(135deg, #9aba9a 0%, #8aaa8a 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(154, 186, 154, 0.3);
+      }
+
+      .nav-link.tertiary:hover {
+        background: linear-gradient(135deg, #aaca9a 0%, #9aba9a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(154, 186, 154, 0.4);
+      }
+
+      .nav-link.contact {
+        color: #5a7a6a;
+        background: transparent;
+        font-weight: 600;
+      }
+
+      .nav-link.contact:hover {
+        color: #4a6a5a;
+        background: rgba(90, 122, 106, 0.1);
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        border: 2px solid #d0d0d0;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .download-btn {
+        animation: pulse 2s infinite;
+      }
+
+      .download-btn:hover {
+        background: linear-gradient(135deg, #e8e8e8 0%, #d8d8d8 100%);
+        border-color: #c0c0c0;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: none;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .download-icon {
+        width: 16px;
+        height: 16px;
+        background: #999;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: white;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .nav-container {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .nav-menu {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 4px;
+        }
+
+        .nav-link {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+
+        .download-btn {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+      }
+
+      /* Hero Section Styles */
+      .hero {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        background: linear-gradient(
+            135deg,
+            rgba(90, 122, 106, 0.1) 0%,
+            rgba(74, 106, 90, 0.2) 25%,
+            rgba(58, 90, 74, 0.3) 50%,
+            rgba(42, 74, 58, 0.4) 75%,
+            rgba(26, 58, 42, 0.5) 100%
+          ),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="%23f0f8f0"/><rect width="100%" height="100%" fill="url(%23grid)"/><g transform="translate(100,100)"><rect x="0" y="0" width="200" height="120" rx="10" fill="%235a7a6a" opacity="0.8"/><rect x="50" y="30" width="100" height="60" rx="5" fill="%2372a472" opacity="0.6"/><circle cx="300" cy="200" r="80" fill="%236a8a7a" opacity="0.7"/><rect x="450" y="150" width="150" height="100" rx="8" fill="%234a6a5a" opacity="0.8"/><polygon points="700,100 800,100 750,200" fill="%235a7a6a" opacity="0.6"/><rect x="850" y="80" width="180" height="140" rx="12" fill="%236a8a7a" opacity="0.7"/><circle cx="200" cy="400" r="60" fill="%234a6a5a" opacity="0.8"/><rect x="350" y="350" width="120" height="80" rx="6" fill="%235a7a6a" opacity="0.6"/><polygon points="550,380 650,380 600,480" fill="%236a8a7a" opacity="0.7"/><rect x="750" y="320" width="160" height="120" rx="10" fill="%234a6a5a" opacity="0.8"/><circle cx="150" cy="600" r="70" fill="%235a7a6a" opacity="0.7"/><rect x="300" y="550" width="140" height="90" rx="8" fill="%236a8a7a" opacity="0.6"/><rect x="500" y="580" width="130" height="70" rx="5" fill="%234a6a5a" opacity="0.8"/><circle cx="750" cy="620" r="50" fill="%235a7a6a" opacity="0.6"/><rect x="850" y="570" width="170" height="110" rx="9" fill="%236a8a7a" opacity="0.7"/></g></svg>');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 40px;
+        overflow: hidden;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url(files/Kirloskar1Kirloskar-powergenerators1.jpgKirloskar-new-image-1.jpg)
+          no-repeat center center;
+        background-size: cover;
+        filter: brightness(0.5) contrast(1.2) saturate(1.5);
+        backdrop-filter: blur(1px);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 600px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transform: translateY(0);
+        transition: all 0.3s ease;
+      }
+
+      .hero-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #2a4a3a;
+        margin-bottom: 16px;
+        line-height: 1.2;
+        background: linear-gradient(135deg, #2a4a3a 0%, #4a6a5a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #5a7a6a;
+        margin-bottom: 24px;
+        line-height: 1.3;
+      }
+
+      .hero-text {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #4a4a4a;
+        margin-bottom: 32px;
+        text-align: justify;
+      }
+
+      .hero-cta {
+        background: linear-gradient(135deg, #5a7a6a 0%, #4a6a5a 100%);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(90, 122, 106, 0.3);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+      }
+
+      .hero-cta::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .hero-cta:hover::before {
+        left: 100%;
+      }
+
+      .hero-cta:hover {
+        background: linear-gradient(135deg, #6a8a7a 0%, #5a7a6a 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(90, 122, 106, 0.4);
+      }
+
+      .hero-cta:active {
+        transform: translateY(0);
+      }
+
+      /* About Section Styles - Updated to match screenshot */
+      .about-section {
+        background: linear-gradient(135deg, #4a6a5a 0%, #5a7a6a 100%);
+        padding: 40px 10px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .about-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+
+      .about-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.9);
+        color: #4a6a5a;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .about-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+      }
+
+      .image-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-card:nth-child(3) {
+        grid-column: 1 / -1;
+        aspect-ratio: 2/1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .image-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .image-card img {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .image-card:nth-child(3) img {
+        max-width: 300px;
+      }
+
+      .image-caption {
+        font-size: 14px;
+        font-weight: 600;
+        color: #4a6a5a;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .about-container {
+          grid-template-columns: 1fr;
+          gap: 60px;
+          text-align: center;
+        }
+
+        .about-title {
+          font-size: 2.8rem;
+        }
+
+        .about-images {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+        }
+
+        .image-card:nth-child(3) {
+          grid-column: auto;
+          aspect-ratio: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          height: 100vh;
+          padding: 20px;
+          align-items: center;
+        }
+
+        .hero-card {
+          padding: 30px 24px;
+          max-width: 100%;
+        }
+
+        .hero-title {
+          font-size: 2.2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .hero-text {
+          font-size: 0.95rem;
+        }
+
+        .hero-cta {
+          padding: 14px 28px;
+          font-size: 1rem;
+        }
+
+        .about-section {
+          padding: 60px 10px;
+        }
+
+        .about-title {
+          font-size: 2.2rem;
+        }
+
+        .about-description {
+          font-size: 1rem;
+          padding: 20px;
+        }
+
+        .about-images {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .hero-text {
+          font-size: 0.9rem;
+          text-align: left;
+        }
+
+        .about-title {
+          font-size: 1.8rem;
+        }
+      }
+
+      .services-section {
+        padding: 60px 20px;
+        position: relative;
+      }
+
+      .services-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .section-header {
+        margin-bottom: 60px;
+      }
+
+      .nav-pill {
+        text-align: left;
+        display: inline-block;
+        background: linear-gradient(135deg, #c8b3e6 0%, #b8a3d6 100%);
+        color: #4a4a4a;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(200, 179, 230, 0.3);
+      }
+
+      .main-title {
+        font-size: 3.2rem;
+        color: #2d5a4f;
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+        margin-top: 80px;
+      }
+
+      .service-card {
+        text-align: center;
+        position: relative;
+      }
+
+      .service-image {
+        width: 280px;
+        height: 280px;
+        border-radius: 25px;
+        object-fit: cover;
+        margin: 0 auto 30px;
+        display: block;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-title {
+        font-size: 1.8rem;
+        color: #2d5a4f;
+        font-weight: 400;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .service-subtitle {
+        font-size: 1rem;
+        color: #7a8e89;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+
+      .bullet-point {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #6db4a6;
+        border-radius: 50%;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      /* Specific positioning adjustments to match the layout */
+      .service-card:nth-child(1) {
+        transform: translateY(-20px);
+      }
+
+      .service-card:nth-child(2) {
+        transform: translateY(40px);
+      }
+
+      .service-card:nth-child(3) {
+        transform: translateY(-10px);
+      }
+
+      @media (max-width: 1024px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 60px;
+          text-align: center;
+        }
+
+        .service-card:nth-child(1),
+        .service-card:nth-child(2),
+        .service-card:nth-child(3) {
+          transform: translateY(0);
+        }
+
+        .main-title {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .service-image {
+          width: 240px;
+          height: 240px;
+        }
+      }
+
+      .flip-card-container {
+        /* Basic layout for your cards */
+        display: flex;
+        justify-content: space-around;
+        perspective: 1000px; /* Defines the 3D perspective */
+      }
+
+      .flip-card {
+        width: 280px; /* Adjust as needed */
+        height: 280px; /* Adjust as needed */
+        position: relative;
+        transform-style: preserve-3d; /* Crucial for 3D effect */
+        transition: transform 0.8s; /* Smooth transition for the flip */
+        margin: 20px;
+      }
+
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden; /* Hides the back of the element when facing away */
+        border-radius: 10px; /* Example styling */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Example styling */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .flip-card-front {
+        background-color: #f0f0f0; /* Example styling */
+        transform: rotateY(-90deg); /* Initially visible, not rotated */
+      }
+
+      .flip-card-back {
+        background-color: #e0e0e0; /* Example styling */
+        transform: rotateY(90deg); /* Initially hidden, rotated */
+      }
+
+      /* When the card is "flipped" (e.g., by adding a class with JS) */
+      .flip-card.flipped {
+        transform: rotateY(90deg); /* Or rotateX for vertical flip */
+      }
+      .accomp-section {
+        background: linear-gradient(135deg, #4a6a5a 0%, #5a7a6a 100%);
+        padding: 40px 10px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .container {
+        padding: 50px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 100px; /* Space between rows */
+        position: relative; /* For animation positioning */
+      }
+
+      .row.reverse {
+        flex-direction: row-reverse;
+      }
+
+      .icon-wrapper {
+        width: 150px; /* Size of the icon wrapper */
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #d1c4e9; /* Light purple for icon background */
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0; /* Prevent shrinking */
+        transition: transform 0.8s ease-out; /* For animation */
+      }
+
+      .icon {
+        width: 80px; /* Size of the icon image */
+        height: 80px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      /* Specific icons - you'll need to replace these with actual SVG or image paths */
+      .icon-engineering {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a1 1 0 0 0 0-1.41L19.5 3.3a1 1 0 0 0-1.4 0l-3.8 3.8zM5 21l-1.5-1.5L2 18l5-5 5 5-3.5 3.5z"/></svg>');
+      }
+      .icon-service {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>');
+      }
+      .icon-customer {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87c-.5-.07-1-.13-1.5-.13h-1A4 4 0 0 0 16 9h-1a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="17" cy="7" r="4"/></svg>');
+      }
+
+      .content-block {
+        background-color: #dee8d8; /* Light green for content block */
+        border-radius: 15px;
+        padding: 30px;
+        margin: 0 50px; /* Space from icons initially */
+        flex-grow: 1; /* Allows content block to take available space */
+        max-width: 600px; /* Max width for content */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        color: #333; /* Darker text for content block */
+        transition: transform 0.8s ease-out; /* For animation */
+      }
+      .engineering-excellence {
+        background-color: #d1c4e9; /* Light background for engineering excellence */
+      }
+      .complete-service-model {
+        background-color: #f0f4f0; /* Light background for complete service model */
+      }
+      .mid-right {
+        background-color: #f0f4f0; /* Light background for mid-right content */
+      }
+      .bottom-left {
+        background-color: #c8e6c9; /* Light background for bottom-left content */
+      }
+      .bottom-left {
+        background-color: #c8e6c9; /* Light background for bottom-left content */
+      }
+
+      .content-block h2 {
+        color: #1a423a; /* Heading color */
+        margin-top: 0;
+        font-size: 1.8em;
+      }
+
+      .content-block p {
+        line-height: 1.6;
+        font-size: 0.95em;
+      }
+
+      /* Animation states - these classes will be added/removed by JavaScript */
+      .row.animated .icon-wrapper {
+        transform: translateX(0) !important; /* Reset transform for icons */
+      }
+
+      .row.animated .content-block {
+        transform: translateX(0) !important; /* Reset transform for content */
+      }
+
+      /* Initial positions for animation */
+      .row:not(.animated) .top-left {
+        transform: translateX(-150px); /* Move icon left */
+      }
+      .row:not(.animated) .engineering-excellence {
+        transform: translateX(150px); /* Move content right */
+      }
+
+      .row:not(.animated) .complete-service-model {
+        transform: translateX(-150px); /* Move content left */
+      }
+      .row:not(.animated) .mid-right {
+        transform: translateX(150px); /* Move icon right */
+      }
+
+      .row:not(.animated) .bottom-left {
+        transform: translateX(-150px); /* Move icon left */
+      }
+      .row:not(.animated) .customer-centric-approach {
+        transform: translateX(150px); /* Move content right */
+      }
+
+      /* Team Section Styles */
+      .team-section {
+        max-width: 1200px;
+        margin: 120px auto 0;
+        position: relative;
+      }
+
+      .team-pill {
+        background: linear-gradient(135deg, #5a8f7a 0%, #4a7f6a 100%);
+        color: white;
+      }
+
+      .team-member {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        margin-top: 80px;
+      }
+
+      .member-image-container {
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .member-image {
+        width: 350px;
+        height: 500px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .event-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 200, 180, 0.8) 0%,
+          rgba(0, 150, 140, 0.9) 100%
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .event-text {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .welcome-text {
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        opacity: 0.9;
+      }
+
+      .event-title {
+        font-size: 2.5rem;
+        line-height: 1.1;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .member-info {
+        flex: 1;
+        padding-left: 20px;
+      }
+
+      .member-name {
+        font-size: 2.2rem;
+        color: #2d5a4f;
+        font-weight: 500;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+      }
+
+      .member-description {
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      /* Media queries for responsiveness */
+      @media (max-width: 900px) {
+        .row {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .row.reverse {
+          flex-direction: column; /* Stacks in reverse for mobile */
+        }
+
+        .icon-wrapper,
+        .content-block {
+          margin: 20px 0; /* Adjust margin for stacking */
+          transform: none !important; /* Disable initial transform on smaller screens */
+        }
+
+        /* Remove animation for smaller screens as it might not look good */
+        .row.animated .icon-wrapper,
+        .row.animated .content-block {
+          transform: none !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .service-image {
+          width: 240px;
+          height: 240px;
+        }
+
+        .member-image {
+          width: 280px;
+          height: 400px;
+        }
+
+        .event-title {
+          font-size: 2rem;
+        }
+
+        .member-name {
+          font-size: 1.8rem;
+        }
+
+        .member-description {
+          font-size: 1rem;
+        }
+      }
+
+      .contact-section {
+        max-width: 1200px;
+        margin: 120px auto 0;
+        background: linear-gradient(135deg, #4a6a5a 0%, #5a7a6a 100%);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-container {
+        display: flex;
+      }
+
+      .contact-form-section {
+        flex: 1;
+        padding: 60px 50px;
+        background: white;
+      }
+
+      .contact-info-section {
+        flex: 1;
+        background: linear-gradient(135deg, #2d5a4f 0%, #1a3e35 100%);
+        padding: 60px 50px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 40px;
+        font-weight: 600;
+      }
+
+      .form-group {
+        margin-bottom: 30px;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .form-row .form-group {
+        flex: 1;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .required {
+        color: #e74c3c;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px 0;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        font-size: 1rem;
+        background: transparent;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-bottom-color: #2d5a4f;
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 15px 0;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        font-size: 1rem;
+        background: transparent;
+        resize: vertical;
+        min-height: 100px;
+        font-family: inherit;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-bottom-color: #2d5a4f;
+      }
+
+      .phone-input-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .country-code {
+        padding: 15px 10px 15px 0;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        background: transparent;
+        font-size: 1rem;
+        margin-right: 10px;
+        width: 80px;
+      }
+
+      .phone-input {
+        flex: 1;
+        padding: 15px 0;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        font-size: 1rem;
+        background: transparent;
+      }
+
+      .submit-btn {
+        background: #333;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .submit-btn:hover {
+        background: #2d5a4f;
+        transform: translateY(-2px);
+      }
+
+      .contact-info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding: 15px 25px;
+        background: rgba(255, 87, 34, 0.9);
+        border-radius: 10px;
+        font-weight: 500;
+      }
+
+      .contact-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+        fill: white;
+      }
+
+      .address-block {
+        background: rgba(255, 87, 34, 0.9);
+        padding: 25px;
+        border-radius: 10px;
+        margin-top: 30px;
+      }
+
+      .company-name {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .address-line {
+        margin-bottom: 5px;
+        line-height: 1.4;
+      }
+
+      .branch-info {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .success-message {
+        display: none;
+        background: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #c3e6cb;
+      }
+
+      .error-message {
+        display: none;
+        background: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #f5c6cb;
+      }
+
+      /* Specific positioning adjustments to match the layout */
+      .service-card:nth-child(1) {
+        transform: translateY(-20px);
+      }
+
+      .service-card:nth-child(2) {
+        transform: translateY(40px);
+      }
+
+      .service-card:nth-child(3) {
+        transform: translateY(-10px);
+      }
+
+      @media (max-width: 1024px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 60px;
+          text-align: center;
+        }
+
+        .service-card:nth-child(1),
+        .service-card:nth-child(2),
+        .service-card:nth-child(3) {
+          transform: translateY(0);
+        }
+
+        .main-title {
+          font-size: 2.5rem;
+        }
+
+        .team-member {
+          flex-direction: column;
+          gap: 40px;
+          text-align: center;
+        }
+
+        .member-info {
+          padding-left: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .service-image {
+          width: 240px;
+          height: 240px;
+        }
+
+        .member-image {
+          width: 280px;
+          height: 400px;
+        }
+
+        .event-title {
+          font-size: 2rem;
+        }
+
+        .member-name {
+          font-size: 1.8rem;
+        }
+
+        .member-description {
+          font-size: 1rem;
+        }
+
+        .contact-container {
+          flex-direction: column;
+        }
+
+        .contact-form-section,
+        .contact-info-section {
+          padding: 40px 30px;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .contact-title {
+          font-size: 2rem;
+        }
+      }
+      /* Footer Styles */
+      .footer {
+        background: linear-gradient(135deg, #1a3e35 0%, #0f2a22 100%);
+        color: white;
+        margin-top: 80px;
+      }
+
+      .footer-main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px 40px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 60px;
+        align-items: start;
+      }
+
+      .footer-company {
+        padding-right: 20px;
+      }
+
+      .footer-logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #6db4a6;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+      }
+
+      .footer-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(109, 180, 166, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .social-icon:hover {
+        background: #6db4a6;
+        transform: translateY(-2px);
+      }
+
+      .social-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+      }
+
+      .footer-section h3 {
+        color: #6db4a6;
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-links a:hover {
+        color: #6db4a6;
+        padding-left: 5px;
+      }
+
+      .footer-links a::before {
+        content: "▸";
+        color: #6db4a6;
+        margin-right: 8px;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-links a:hover::before {
+        opacity: 1;
+      }
+
+      .footer-contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+      }
+
+      .footer-contact-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 12px;
+        fill: #6db4a6;
+        flex-shrink: 0;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 30px 0;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .footer-copyright {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .footer-bottom-links a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom-links a:hover {
+        color: #6db4a6;
+      }
+
+      .newsletter-form {
+        margin-top: 20px;
+      }
+
+      .newsletter-input {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .newsletter-input input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        color: white;
+        font-size: 0.9rem;
+      }
+
+      .newsletter-input input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .newsletter-input input:focus {
+        outline: none;
+        border-color: #6db4a6;
+      }
+
+      .newsletter-btn {
+        background: #6db4a6;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .newsletter-btn:hover {
+        background: #5a9b8d;
+        transform: translateY(-1px);
+      }
+
+      .newsletter-text {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.4;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+        }
+
+        .footer-company {
+          grid-column: 1 / -1;
+          text-align: center;
+          padding-right: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding: 40px 20px 30px;
+        }
+
+        .footer-bottom-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-bottom-links {
+          justify-content: center;
+        }
+
+        .newsletter-input {
+          flex-direction: column;
+        }
+
+        .newsletter-btn {
+          align-self: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav-container">
+        <a href="#" class="logo"> </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link primary">Products</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link secondary">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#team" class="nav-link tertiary">Meet the Team</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link contact">Contact us</a>
+          </li>
+          <li class="nav-item">
+            <a href="/files/brochure.pdf" class="download-btn">
+              Download Brochure
+              <span class="download-icon">↓</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-card">
+          <h1 class="hero-title">SAHITI ENTERPRISES</h1>
+          <h2 class="hero-subtitle">
+            Empowering Industries with Reliable Power Solutions
+          </h2>
+          <p class="hero-text">
+            Welcome to SAHITI ENTERPRISES - Empowering Industries with Reliable
+            Power Solutions. SAHITI ENTERPRISES is a trusted name in the field
+            of industrial and residential power solutions, specializing in the
+            Trading, installation of Kirloskar oil engines diesel generator sets
+            across Medak and Kamareddy and Hyderabad. With a strong foundation
+            built on engineering excellence and customer-first values, we have
+            grown into a preferred partner for industries and real estate that
+            demand reliability, efficiency, and long-term performance from their
+            power backup systems.
+          </p>
+          <a href="#contact" class="hero-cta">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section - Updated to match screenshot -->
+    <section class="about-section" id="about">
+      <div class="about-container">
+        <div class="about-content">
+          <div class="about-badge">About SAHITI ENTERPRISES</div>
+          <h2 class="about-title">
+            Engineering Excellence and Customer Commitment
+          </h2>
+          <p class="about-description">
+            Established with the vision of delivering uninterrupted power to
+            every corner of the Telangana SAHITI ENTERPRISES has consistently
+            invested in highly skilled workforce, Our kirloskar oil engines
+            product portfolio includes a wide range of diesel generator
+            sets—from compact residential models to heavy-duty industrial
+            gensets—each designed to perform under the toughest environmental
+            and operational conditions.
+          </p>
+        </div>
+
+        <div class="about-images">
+          <div class="image-card">
+            <img src="files/genset2.jpg" alt="Kirloskar Generator Set" />
+            <div class="image-caption">Kirloskar Generator</div>
+          </div>
+
+          <div class="image-card">
+            <img src="files/genset.jpg" alt="Control Panel" />
+            <div class="image-caption">Control Panel</div>
+          </div>
+
+          <div class="image-card">
+            <img src="files/roof_generator.jpg" alt="Power Solution System" />
+            <div class="image-caption">Complete Power Solution</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+      <div class="services-container">
+        <div class="section-header">
+          <div class="nav-pill">Our Power Solutions</div>
+          <h2 class="main-title">Explore Our Range of Services</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="flip-card">
+              <div class="flip-card-front">
+                <img
+                  src="files/kirloskarpowergen-1.jpg"
+                  alt="Customized Power Solutions"
+                  class="service-image"
+                />
+              </div>
+            </div>
+
+            <h3 class="service-title">
+              <span class="bullet-point"></span>Customized<br />Power Solutions
+            </h3>
+            <p class="service-subtitle">Tailored to Your Industry</p>
+          </div>
+
+          <div class="service-card">
+            <div class="flip-card">
+              <div class="flip-card-front">
+                <img
+                  src="files/kirloskarpowergen-2.jpg"
+                  alt="Diesel Generator Sets"
+                  class="service-image"
+                />
+              </div>
+            </div>
+            <h3 class="service-title">
+              <span class="bullet-point"></span>Diesel Generator<br />Sets
+            </h3>
+            <p class="service-subtitle">Reliable Power Backup Systems</p>
+          </div>
+
+          <div class="service-card">
+            <div class="flip-card">
+              <div class="flip-card-front">
+                <img
+                  src="files/kirloskarpowergen-3.jpg"
+                  alt="Installation Services"
+                  class="service-image"
+                />
+              </div>
+            </div>
+            <h3 class="service-title">
+              <span class="bullet-point"></span>Installation<br />Services
+            </h3>
+            <p class="service-subtitle">Professional Setup and<br />Support</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Key Advantages Section - Updated to match screenshot -->
+    <section class="accomp-section" id="accomplishments">
+      <div class="about-container">
+        <div class="about-content">
+          <div class="about-badge">Key Advantages</div>
+          <h2 class="about-title">Why Choose SAHITI ENTERPRISES</h2>
+          <p class="about-description">
+            SAHITI ENTERPRISES is kirloskar authorised dealer for gensets in
+            medak, hyderabad proudly serves a wide spectrum of sectors including
+            construction, healthcare, telecom, data centers, logistics,
+            education, agriculture, commercial buildings, and more. Whether it’s
+            powering a rural school, a high-rise apartment, a highway
+            infrastructure project, or an emergency hospital setup—our solutions
+            are tailored to match the unique needs of each client.
+          </p>
+        </div>
+      </div>
+      <div class="accomp-container">
+        <div class="container">
+          <div class="row">
+            <div class="icon-wrapper top-left">
+              <div class="icon icon-engineering"></div>
+            </div>
+            <div class="content-block engineering-excellence">
+              <h2>Engineering Excellence</h2>
+              <p>
+                Every genset produced under Kirlosker oil engines brand is
+                tested for load capacity, fuel efficiency, noise control, and
+                emission compliance, ensuring that our customers receive
+                products that are not only powerful but also sustainable and
+                eco-friendly.
+              </p>
+            </div>
+          </div>
+
+          <div class="row reverse">
+            <div class="content-block complete-service-model">
+              <h2>Complete Service Model</h2>
+              <p>
+                What sets us apart is our complete end-to-end service model from
+                consultation and site inspection to system design, installation,
+                testing, and long-term maintenance plans, annual maintenance
+                contracts (AMCs/Annual Maintenance Contracts), rapid response
+                breakdown services, and genuine spare parts from Kirloskar oil
+                engines service dealer to ensure complete peace of mind and
+                consistent performance.
+              </p>
+            </div>
+            <div class="icon-wrapper mid-right">
+              <div class="icon icon-service"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="icon-wrapper bottom-left">
+              <div class="icon icon-customer"></div>
+            </div>
+            <div class="content-block customer-centric-approach">
+              <h2>Customer-Centric Approach</h2>
+              <p>
+                As a customer-centric enterprise, we continue to expand our
+                network of service hubs, and logistics infrastructure to support
+                faster delivery and localized technical support across the
+                Telangana. Our commitment to innovation, sustainability, and
+                energy resilience drives us for ward to be the most trusted
+                genset sales & service provider and a dependable power partner
+                for a better tomorrow.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+      <div class="section-header">
+        <div class="nav-pill team-pill">Meet Our Team</div>
+        <h2 class="main-title">Dedicated Experts in Power Solutions</h2>
+      </div>
+
+      <div class="team-member">
+        <div class="member-image-container">
+          <img
+            src="files/ramakrishna.jpg"
+            alt="G. Ramakrishna"
+            class="member-image"
+          />
+        </div>
+        <div class="member-info">
+          <h3 class="member-name">G. RAMAKRISHNA</h3>
+          <p class="member-description">
+            With over a decade of engineering experience and a proven track
+            record in large-scale installations, SAHIT ENTERPRISES provides
+            comprehensive power solutions that cover everything from
+            low-capacity residential gensets (5 kVA to 25 kVA) to high-capacity
+            industrial powerhouses (up to 2000 kVA and beyond).
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <div class="contact-form-section">
+          <h2 class="contact-title">Contact us</h2>
+
+          <div id="successMessage" class="success-message">
+            Thank you for your message! We'll get back to you soon.
+          </div>
+
+          <div id="errorMessage" class="error-message">
+            Please fill in all required fields correctly.
+          </div>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName" class="form-label"
+                  >First name <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  class="form-input"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label"
+                >Email <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <div class="phone-input-container">
+                <select class="country-code" id="countryCode">
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+86">🇨🇳 +86</option>
+                </select>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="phone-input"
+                  placeholder="Enter phone number"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Write a message</label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-textarea"
+                placeholder="Your message here..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+          </form>
+        </div>
+
+        <div class="contact-info-section">
+          <div class="contact-info-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"
+              />
+            </svg>
+            +91 9381293184
+          </div>
+
+          <div class="contact-info-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"
+              />
+            </svg>
+            +91 9848025681
+          </div>
+
+          <div class="contact-info-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+              />
+            </svg>
+            sahitenterprises2018@gmail.com
+          </div>
+
+          <div class="address-block">
+            <div class="company-name">SAHIT ENTERPRISES</div>
+            <div class="address-line">
+              plot no 2/3 SN Colony Iothkunta Trimulgherry
+            </div>
+            <div class="address-line">Secunderabad-500015</div>
+
+            <div class="branch-info">
+              <strong>BRANCH-</strong> near Saibaba temple, Sangareddy
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-main">
+        <div class="footer-company">
+          <div class="footer-logo">SAHIT ENTERPRISES</div>
+          <p class="footer-description">
+            Leading provider of comprehensive power solutions with over a decade
+            of engineering excellence. We specialize in customized power
+            systems, diesel generator sets, and professional installation
+            services for residential, commercial, and industrial applications.
+          </p>
+          <div class="footer-social">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z"
+                />
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"
+                />
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"
+                />
+              </svg>
+            </div>
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Customized Power Solutions</a></li>
+            <li><a href="#services">Diesel Generator Sets</a></li>
+            <li><a href="#services">Installation Services</a></li>
+            <li><a href="#services">Maintenance & Support</a></li>
+            <li><a href="#services">Emergency Power Systems</a></li>
+            <li><a href="#services">Industrial Solutions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#news">News & Updates</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <p
+            style="
+              color: rgba(255, 255, 255, 0.8);
+              font-size: 0.9rem;
+              margin-bottom: 20px;
+            "
+          >
+            Subscribe to get updates on our latest power solutions and industry
+            insights.
+          </p>
+          <form class="newsletter-form">
+            <div class="newsletter-input">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" class="newsletter-btn">Subscribe</button>
+            </div>
+            <p class="newsletter-text">
+              By subscribing, you agree to our Privacy Policy and consent to
+              receive updates from SAHIT ENTERPRISES.
+            </p>
+          </form>
+
+          <div style="margin-top: 30px">
+            <div class="footer-contact-item">
+              <svg class="footer-contact-icon" viewBox="0 0 24 24">
+                <path
+                  d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"
+                />
+              </svg>
+              +91 9381293184
+            </div>
+            <div class="footer-contact-item">
+              <svg class="footer-contact-icon" viewBox="0 0 24 24">
+                <path
+                  d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                />
+              </svg>
+              sahitenterprises2018@gmail.com
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-copyright">
+            © 2025 SAHIT ENTERPRISES. All rights reserved.
+          </div>
+          <div class="footer-bottom-links">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#cookies">Cookie Policy</a>
+            <a href="#sitemap">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    // JavaScript for flip card functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      const flipCards = document.querySelectorAll(".flip-card");
+      const rows = document.querySelectorAll(".row");
+
+      const observerOptions = {
+        root: null, // relative to the viewport
+        rootMargin: "0px",
+        threshold: 0.5, // Trigger when 50% of the item is visible
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("flipped");
+            entry.target.classList.add("animated");
+            // If you only want it to flip once, uncomment the line below
+            // observer.unobserve(entry.target);
+          } else {
+            // Optional: If you want them to un-flip when scrolled out of view
+            entry.target.classList.remove("flipped");
+            entry.target.classList.remove("animated");
+          }
+        });
+      }, observerOptions);
+
+      flipCards.forEach((card) => {
+        observer.observe(card);
+      });
+
+      rows.forEach((row) => {
+        observer.observe(row);
+      });
+    });
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(this);
+        const data = {
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          countryCode: document.getElementById("countryCode").value,
+          message: formData.get("message"),
+        };
+
+        // Validate required fields
+        if (!data.firstName || !data.email) {
+          showError("Please fill in all required fields.");
+          return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+          showError("Please enter a valid email address.");
+          return;
+        }
+
+        // Simulate sending email
+        sendEmail(data);
+      });
+
+    function sendEmail(data) {
+      // Show loading state
+      const submitBtn = document.querySelector(".submit-btn");
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+
+        // Show success message
+        showSuccess("Thank you for your message! We'll get back to you soon.");
+
+        // Reset form
+        document.getElementById("contactForm").reset();
+
+        // In a real implementation, you would send the data to your backend:
+        /*
+                fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        showSuccess('Thank you for your message! We\'ll get back to you soon.');
+                        document.getElementById('contactForm').reset();
+                    } else {
+                        showError('Failed to send message. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    showError('Failed to send message. Please try again.');
+                });
+                */
+      }, 2000);
+    }
+
+    function showSuccess(message) {
+      const successDiv = document.getElementById("successMessage");
+      const errorDiv = document.getElementById("errorMessage");
+
+      errorDiv.style.display = "none";
+      successDiv.textContent = message;
+      successDiv.style.display = "block";
+
+      // Hide after 5 seconds
+      setTimeout(() => {
+        successDiv.style.display = "none";
+      }, 5000);
+    }
+
+    function showError(message) {
+      const successDiv = document.getElementById("successMessage");
+      const errorDiv = document.getElementById("errorMessage");
+
+      successDiv.style.display = "none";
+      errorDiv.textContent = message;
+      errorDiv.style.display = "block";
+
+      // Hide after 5 seconds
+      setTimeout(() => {
+        errorDiv.style.display = "none";
+      }, 5000);
+    }
+  </script>
+</html>
